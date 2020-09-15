@@ -1,5 +1,4 @@
 ﻿using AzureBlobCMS.Interfaces;
-using AzureBlobCMS.Models;
 using HtmlAgilityPack;
 using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
