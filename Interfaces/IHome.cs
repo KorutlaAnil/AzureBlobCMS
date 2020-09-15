@@ -8,12 +8,12 @@ namespace AzureBlobCMS.Interfaces
 {
     public interface IHome
     {
-        Task<Home> GetData();
-        Task<Home> GetDataByLang(string lang);
+        Task<Object> GetData();
+        Task<object> GetDataByLang(string lang);
 
-        Task<bool> WriteData(Home home);
+        Task<bool> WriteData(Object home);
 
-        Task<bool> WriteDataByLang(string lang, Home home);
+        Task<bool> WriteDataByLang(string lang, Object home);
 
     }
 }

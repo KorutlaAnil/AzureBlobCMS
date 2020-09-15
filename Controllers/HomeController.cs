@@ -35,13 +35,26 @@ namespace AzureBlobCMS.Controllers
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> WriteDataByLang(string lang, Home home)
+        public async Task<IActionResult> WriteDataByLang(string lang,[FromBody] Object home)
         {
             if (lang==null||!ModelState.IsValid)
             {
                 return BadRequest();
             }
             var result = await _home.WriteDataByLang(lang,home);
+            if (result)
+                return Ok(result);
+
+            return NotFound();
+        }
+        [HttpPost("Update")]
+        public async Task<IActionResult> WriteData( [FromBody] Object home)
+        {
+            if ( !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var result = await _home.WriteData( home);
             if (result)
                 return Ok(result);
 

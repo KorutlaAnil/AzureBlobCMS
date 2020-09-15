@@ -5,6 +5,7 @@ using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -32,12 +33,12 @@ namespace AzureBlobCMS.Service
         #endregion
 
         #region Public Method
-        public async Task<Home> GetData()
+        public async Task<object> GetData()
         {
             try
             {
                 string response = await GetBlob("jsonconfig", "Anil.json");
-                var home = JsonConvert.DeserializeObject<Home>(response);
+                var home = JsonConvert.DeserializeObject<dynamic>(response);
                 if (home != null)
                 {
                     return home;
@@ -53,29 +54,30 @@ namespace AzureBlobCMS.Service
             }
         }
 
-        public async Task<Home> GetDataByLang(string lang)
+        public async Task<object> GetDataByLang(string lang)
         {
             try
             {
                 string response = await GetBlob("jsonconfig", "Anil.json");
-                var data = JsonConvert.DeserializeObject<Home>(response);
+                var res = JObject.Parse(response);
+                
+                var data = JsonConvert.DeserializeObject<dynamic>(response);
                 if (data != null)
                 {
-
-                    Home home = new Home();
                     if (lang == "eng")
                     {
-                        home.eng = data.eng;
+                        return data.eng; 
+                       
                     }
                     else if (lang == "chn")
                     {
-                        home.chn = data.chn;
+                        return data.chn;
                     }
                     else
                     {
                         return null;
                     }
-                    return home;
+                   
                 }
                 else
                 {
@@ -88,7 +90,7 @@ namespace AzureBlobCMS.Service
             }
         }
 
-        public async Task<bool> WriteData(Home home)
+        public async Task<bool> WriteData(Object home)
         {
             try
             {
@@ -103,22 +105,24 @@ namespace AzureBlobCMS.Service
             }
         }
 
-        public async Task<bool> WriteDataByLang(string lang, Home home)
+        public async Task<bool> WriteDataByLang(string lang, Object home)
         {
             try
             {
-                
+                var inputdata = JObject.FromObject(home);         
                 string response = await GetBlob("jsonconfig", "Anil.json");
-                var data = JsonConvert.DeserializeObject<Home>(response);
+                var data = JsonConvert.DeserializeObject<dynamic>(response);
                 if (lang == "eng")
                 {
-                    home.eng.Html = ExtractHtmlInnerText(home.eng.Html);
-                    data.eng = home.eng;
+                    inputdata["Html"] = ExtractHtmlInnerText(inputdata["Html"].ToString());
+                   // home.eng.Html = ExtractHtmlInnerText(home.eng.Html);
+                    data.eng = inputdata;
                 }
                 else if (lang == "chn")
                 {
-                    home.chn.Html = ExtractHtmlInnerText(home.chn.Html);
-                    data.chn = home.chn;
+                    inputdata["Html"] = ExtractHtmlInnerText(inputdata["Html"].ToString());
+                    // home.chn.Html = ExtractHtmlInnerText(home.chn.Html);
+                    data.chn = inputdata;
                 }
                 else
                 {

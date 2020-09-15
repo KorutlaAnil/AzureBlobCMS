@@ -23,5 +23,8 @@ C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\obj\Debug\netcoreapp3.
 C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\obj\Debug\netcoreapp3.1\AzureBlobCMS.pdb
 C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\obj\Debug\netcoreapp3.1\AzureBlobCMS.genruntimeconfig.cache
 C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\bin\Debug\netcoreapp3.1\HtmlAgilityPack.dll
+C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\obj\Debug\netcoreapp3.1\AzureBlobCMS.csproj.CoreCompileInputs.cache
 C:\Users\Harshitha\source\repos\AzureBlobCMS\AzureBlobCMS\obj\Debug\netcoreapp3.1\AzureBlobCMS.MvcApplicationPartsAssemblyInfo.cache
