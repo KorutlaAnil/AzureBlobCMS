@@ -1,0 +1,25 @@
+{
+  
+    "eng": {
+      "1": {
+        "display_name": "Banner",
+        "template": "<div>{text1}</div><small>{text2}</small><button link='https://google.com'>{text3}</button>",
+        "content": {
+          "text1": "Watch the WTT World Cup",
+          "text2": "Lorem Ipsum Datum",
+          "text3": "Watch Preview on Nike"
+        }
+      }
+    },
+    "chn": {
+      "1": {
+        "display_name": "Banner",
+        "template": "<div>{text1}</div><small>{text2}</small><button link='https://google.com'>{text3}</button>",
+        "content": {
+          "text1": "Watch the WTT World Cup",
+          "text2": "Lorem Ipsum Datum",
+          "text3": "Watch Preview on Nike"
+        }
+      }
+    }
+  } 

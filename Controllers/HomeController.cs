@@ -17,47 +17,68 @@ namespace AzureBlobCMS.Controllers
         {
             _home = home;
         }
-        [HttpGet]
-        public async Task<IActionResult> GetData()
+        [HttpGet("GetBlobData/{blobFile}")]
+        public async Task<IActionResult> GetData(string blobFile)
         {
-            var result = await _home.GetData();
+            var result = await _home.GetData(blobFile);
             if (result!=null)
                 return Ok(result);
             return NotFound();
         }
-        [HttpGet("{lang}")]
-        public async Task<IActionResult> GetDataByLang(string lang)
+        [HttpGet("GetBlobDataByLang/{blobFile}/{lang}")]
+        public async Task<IActionResult> GetDataByLang(string blobFile,string lang)
         {
-            var result = await _home.GetDataByLang(lang);
+            var result = await _home.GetDataByLang(blobFile,lang);
             if (result != null)
                 return Ok(result);
             return NotFound();
         }
-        [HttpPost]
-        public async Task<IActionResult> WriteDataByLang(string lang,[FromBody] Object home)
+        [HttpPost("UpdateBlobData/{blobfile}/{lang}")]
+        public async Task<IActionResult> WriteDataByLang(string blobFile,string lang,[FromBody] Object home)
         {
             if (lang==null||!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            var result = await _home.WriteDataByLang(lang,home);
+            var result = await _home.WriteDataByLang(blobFile,lang,home);
             if (result)
                 return Ok(result);
 
             return NotFound();
         }
-        [HttpPost("Update")]
-        public async Task<IActionResult> WriteData( [FromBody] Object home)
+        [HttpPost("UpdateBlobData/{blobFile}")]
+        public async Task<IActionResult> WriteData(string blobFile, [FromBody] Object home)
         {
             if ( !ModelState.IsValid)
             {
                 return BadRequest();
             }
-            var result = await _home.WriteData( home);
+            var result = await _home.WriteData(blobFile, home);
             if (result)
                 return Ok(result);
 
             return NotFound();
+        }
+
+        [HttpGet("create_dynamic_page")]
+        public async Task<IActionResult> CreateDynamicFiles(string fileName,string moduleName)
+        {
+            if (fileName == null && moduleName == null)
+            {
+                return BadRequest();
+            }
+            var res =await _home.CreateDynamicFile(fileName, moduleName);
+            if (res != null)
+            {
+                return Ok(res);
+            }
+            return Conflict("Already Exist");
+        }
+
+        [HttpGet("GetModules")]
+        public async Task<object> GetModules()
+        {
+          return Ok(await _home.GetModules());
         }
     }
 }

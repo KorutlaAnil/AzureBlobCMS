@@ -7,12 +7,14 @@ namespace AzureBlobCMS.Interfaces
 {
     public interface IHome
     {
-        Task<Object> GetData();
-        Task<object> GetDataByLang(string lang);
+        Task<Object> GetData(string blobFile);
+        Task<object> GetDataByLang(string bolbFile,string lang);
 
-        Task<bool> WriteData(Object home);
+        Task<bool> WriteData(string blobFile,Object home);
 
-        Task<bool> WriteDataByLang(string lang, Object home);
+        Task<bool> WriteDataByLang(string bolbFile,string lang, Object home);
+        Task<object> CreateDynamicFile(string fileName, string moduleName);
+        Task<object> GetModules();
 
     }
 }

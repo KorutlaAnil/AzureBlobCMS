@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AzureBlobCMS.Data;
 using AzureBlobCMS.Interfaces;
+using AzureBlobCMS.Models;
 using AzureBlobCMS.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +32,7 @@ namespace AzureBlobCMS
         {
             services.AddControllers().AddNewtonsoftJson(); 
             services.AddScoped<IHome, HomeService>();
+            services.AddDbContext<WTTDbContext>(item => item.UseSqlServer(Configuration.GetConnectionString("mycon")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +46,13 @@ namespace AzureBlobCMS
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
 
             app.UseAuthorization();
 
